@@ -13,13 +13,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     match text_to_pixel_art(text) {
         Ok(pixel_art) => {
             println!("\noutput:");
-            for line in pixel_art {
+            for line in pixel_art.lines() {
                 println!("{}", line);
             }
         }
-        Err(PixelArtError::CharacterNotFound(ch)) => {
+        Err(PixelArtError::UnsupportedCharacter(ch)) => {
             eprintln!("Error: Character '{}' is not supported by the font.", ch);
-            eprintln!("Supported characters: A-Z, a-z, and space");
+            eprintln!("Supported characters: A-Z, a-z, 0-9, and various symbols");
             std::process::exit(1);
         }
         Err(PixelArtError::TextTooLong(len)) => {
